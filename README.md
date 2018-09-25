@@ -16,7 +16,7 @@ It's a 2D-vector library for Lua, created to be used by video games and simulati
 * Unpacking vector
   
 ## Creating vectors  
-There're 2 methods to create a new vector: `LuaVector2.new(x or 0, y or 0)` and `LuaVector2.fromAngle(radian_angle, length or 1)`
+There're 2 methods to create a new vector: with X and Y `LuaVector2.new(x or 0, y or 0)` and with an angle and a vector length `LuaVector2.fromAngle(radian_angle, length or 1)`
   
 ## Vector math
 You can do all basic Lua math operations with two vectors. You also can multiply, divide and modulo a vector by a number and raise its components to the same numeric power.  
