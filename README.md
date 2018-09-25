@@ -1,5 +1,5 @@
 # LuaVector2
-It's a 2D-vector library for Lua, created to be used by videogames and simulations.  
+It's a 2D-vector library for Lua, created to be used by video games and simulations.  
 ## Features
 * Vector math
 * Distances & vector normalizing
@@ -33,7 +33,7 @@ You can also:
 
 ## Copying vector, excracting and overriding values
 Each vector has 2 compoments: **X component** (`['x']` or `[1]`) and **Y component** (`['y']` or `[2]`).
-You can unpack the vector (`LuaVector2:unpack()`), override both its components (`LuaVector2:override(x, y)`) and create new one with them (`LuaVector2:copy()`).
+You can unpack the vector (`LuaVector2:unpack()`), override both its components (`LuaVector2.override(x, y)`) and create new one with them (`LuaVector2:copy()`).
 
 ## Constant Vectors
 Direction vectors (*Note: direction where took with inversed OY for almost game engines*):
