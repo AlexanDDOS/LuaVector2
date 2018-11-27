@@ -220,27 +220,6 @@ function Vector2.normalize(t, unit)
   return new(t.x / d, t.y / d)
 end
 
---Angle functions
-function Vector2.fromAngle(a, d)
-  d = d or 1
-  return new(math.cos(a) * d, math.sin(a) * d)
-end
-
-function Vector2.toAngle(t, deg)
-  local n = t:normalize()
-  local a
-  
-  if n.y == 0 then --asin(0) has ambiguous result IRL but always returns 0 in Lua
-    a = n.x * math.pi --acos(n.x) is always 1 or -1 while asin(t.y) = 0 
-  else
-    a = math.asin(n.y)
-  end
-  
-  if deg then
-    return math.deg(a)
-  end 
-  return a
-end
 
 --Other maths
 function Vector2.dotProduct(a, b)
@@ -261,3 +240,30 @@ function Vector2.sign(t)
 end
 
 return Vector2
+
+--Angle functions
+function Vector2.fromAngle(a, d, rel)
+  d = d or 1
+  a = rel and a + rel:toAngle() or a
+  return new(math.cos(a) * d, -math.sin(a) * d)
+end
+
+function Vector2.toAngle(t, deg, rel)
+  local n = t:normalize()
+  local a
+  
+  rel = rel and rel:normalize() or new(1, 0)
+  n.y, rel.y = -n.y, -rel.y --invert the y component due to the OY axis is usually directed down
+  a = t:dotProduct(rel) / n:dist() / rel:dist()
+  
+  if a == 0 then --acos(0) has ambiguous result IRL but always returns 0 in Lua
+    a = sign(n.x * rel.y) * sign(rel.x) * math.pi --asin(n.x) is always 1 or -1 while acos(t.y) = 0 
+  else
+    a = math.acos(a)
+  end
+  
+  if deg then
+    return math.deg(a)
+  end 
+  return a
+end
