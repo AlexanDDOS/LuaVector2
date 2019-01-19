@@ -154,7 +154,7 @@ end
 function Vector2.__le(t1, t2)
   local x1, y1 = unpack(t1)
   local x2, y2 = unpack(t2)
-  return x1 <= x2 and y1 <= y2
+  return return x1 == x2 and y1 == y2 or t1 < t2
 end
 
 function Vector2.__unm(t)
