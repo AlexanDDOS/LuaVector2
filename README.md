@@ -25,7 +25,7 @@ You can also:
 * Get:
     * Absolute values (`LuaVector2:abs()`)
     * Sign factors (`LuaVector2:sign()`)
-    * Dot products (`LuaVector2.dotProduct(a, b)`)
+    * Dot products (`LuaVector2:dotProduct(a, b)`)
     * Squared or real distance to an other point (`LuaVector2:sqDist(to or VECTOR.ZERO)`, `LuaVector2:dist(to or VECTOR.ZERO)`)
     * Angle between the angle and the OX axis (`LuaVector2:toAngle()`)
 * Round them (`LuaVector2:floor()`,  `LuaVector2:ceil()`)
@@ -33,20 +33,20 @@ You can also:
 
 ## Copying vector, excracting and overriding values
 Each vector has 2 compoments: **X component** (`['x']` or `[1]`) and **Y component** (`['y']` or `[2]`).
-You can unpack the vector (`LuaVector2:unpack()`), override both its components (`LuaVector2.override(x, y)`) and create new one with them (`LuaVector2:copy()`).
+You can unpack the vector (`LuaVector2:unpack()`), override both its components (`LuaVector2:override(x, y)`) and copy it (`LuaVector2:copy()`).
 
 ## Constant Vectors
-Direction vectors (*Note: direction where took with inversed OY for almost game engines*):
-* `LuaVector2:RIGHT` = {1, 0}
-* `LuaVector2:DOWN` = {0, 1}
-* `LuaVector2:LEFT` = {-1, 0}
-* `LuaVector2:UP` = {0, -1}  
+Direction vectors (*Note: direction where took with the inversed OY axis for almost game engines*):
+* `LuaVector2.RIGHT` = {1, 0}
+* `LuaVector2.DOWN` = {0, 1}
+* `LuaVector2.LEFT` = {-1, 0}
+* `LuaVector2.UP` = {0, -1}  
 Unit vectors:
-* `LuaVector2:ZERO` = {0, 0}
-* `LuaVector2:ONE` = {1, 1}
-* `LuaVector2:INF` = {1/0, 1/0}
-* `LuaVector2:NEG_ONE` = {-1, -1}
-* `LuaVector2:NEG_INF` = {-1/0, -1/0}
+* `LuaVector2.ZERO` = {0, 0}
+* `LuaVector2.ONE` = {1, 1}
+* `LuaVector2.INF` = {1/0, 1/0}
+* `LuaVector2.NEG_ONE` = {-1, -1}
+* `LuaVector2.NEG_INF` = {-1/0, -1/0}
 
 ## License
 The library are destributed under the MIT License (see the library file).
