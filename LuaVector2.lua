@@ -182,7 +182,7 @@ function Vector2.copy(t)
 end
 
 function Vector2.override(t, x, y)
-  t.x, t.y = x, y
+  t.x, t.y = x or t.x, y or t.y
 end
 
 function Vector2.compareValues(t)
