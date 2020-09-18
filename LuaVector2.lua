@@ -1,7 +1,7 @@
 --[[
 LuaVector2
 
-Copyright (c) 2018 Alexander Osipov
+Copyright (c) 2018-2020 Alexander Osipov
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -23,6 +23,7 @@ SOFTWARE.
 ]]
 
 local Vector2 = {}
+Vector2.yScale = -1 -- -1 for games & graphics, 1 for mathimatical authenticity
 
 local function sign(t)
   if t == 0 then
@@ -102,7 +103,7 @@ function Vector2.__concat(a, b)
   return t
 end
 
---Vector math
+--Basic vector math
 function Vector2.__add(t1, t2)
   local x1, y1 = unpack(t1)
   local x2, y2 = unpack(t2)
@@ -160,7 +161,7 @@ end
 function Vector2.__unm(t)
   return new(-t.x, -t.y)
 end
---End of the math
+--End of the basic math
 
 --Constant vectors
 Vector2.ZERO = new(0, 0)
@@ -243,7 +244,7 @@ end
 function Vector2.fromAngle(a, d, rel)
   d = d or 1
   a = rel and a + rel:toAngle() or a
-  return new(math.cos(a) * d, -math.sin(a) * d)
+  return new(math.cos(a) * d, math.sin(a) * Vector2.yScale * d)
 end
 
 function Vector2.toAngle(t, deg, rel)
@@ -251,7 +252,7 @@ function Vector2.toAngle(t, deg, rel)
   local a
   
   rel = rel and rel:normalize() or new(1, 0)
-  n.y, rel.y = -n.y, -rel.y --invert the y component due to the OY axis is usually directed down
+  n.y, rel.y = n.y * Vector2.yScale, rel.y * Vector2.yScale
   a = t:dotProduct(rel) / n:dist() / rel:dist()
   
   if a == 0 then --acos(0) has ambiguous result IRL but always returns 0 in Lua
