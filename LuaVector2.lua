@@ -166,7 +166,7 @@ end
 --Constant vectors
 Vector2.ZERO = new(0, 0)
 Vector2.ONE = new(1, 1)
-Vector2.INF = new(math.huge, math.huge)
+Vector2.HUGE = new(math.huge, math.huge)
 
 Vector2.RIGHT = new(1, 0)
 Vector2.DOWN = new(0, 1)
@@ -174,16 +174,24 @@ Vector2.DOWN = new(0, 1)
 Vector2.LEFT = -Vector2.RIGHT
 Vector2.UP = -Vector2.DOWN
 Vector2.NEG_ONE = -Vector2.ONE
-Vector2.NEG_INF = -Vector2.INF
+Vector2.NEG_HUGE = -Vector2.HUGE
 
---Copying
+--Value/object managemant
 function Vector2.copy(t)
   return new(t.x, t.y)
 end
 
---Overriding the values
 function Vector2.override(t, x, y)
   t.x, t.y = x, y
+end
+
+function Vector2.compareValues(t)
+  if t.x < t.y then
+    return -1
+  elseif t.x > t.y then
+    return 1
+  end
+  return 0
 end
 
 --Distance functions
@@ -214,30 +222,20 @@ function Vector2.abs(t)
   return new(math.abs(t.x), math.abs(t.y))
 end
 
---Normalization
+--Normalization & descrete functions
 function Vector2.normalize(t, unit)
   unit = unit or 1
   local d = t:dist() / unit
   return new(t.x / d, t.y / d)
 end
 
+function Vector2.sign(t)
+  return new(sign(t.x), sign(t.y))
+end
 
 --Other maths
 function Vector2.dotProduct(a, b)
   return a[1] * b[1] + a[2] * b[2]
-end
-
-function Vector2.compareValues(t)
-  if t.x < t.y then
-    return -1
-  elseif t.x > t.y then
-    return 1
-  end
-  return 0
-end
-
-function Vector2.sign(t)
-  return new(sign(t.x), sign(t.y))
 end
 
 --Angle functions
