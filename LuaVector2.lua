@@ -217,12 +217,7 @@ function Vector2.ceil(t) --Say hello to Godot developers
   return new(math.ceil(t.x), math.ceil(t.y))
 end
 
---Absolute function
-function Vector2.abs(t)
-  return new(math.abs(t.x), math.abs(t.y))
-end
-
---Normalization & descrete functions
+--Normalization & sign tricks
 function Vector2.normalize(t, unit)
   unit = unit or 1
   local d = t:dist() / unit
@@ -231,6 +226,10 @@ end
 
 function Vector2.sign(t)
   return new(sign(t.x), sign(t.y))
+end
+
+function Vector2.abs(t)
+  return new(math.abs(t.x), math.abs(t.y))
 end
 
 --Other maths
