@@ -131,13 +131,13 @@ end
 function Vector2.__mod(t1, t2)
   local x1, y1 = factor(t1)
   local x2, y2 = factor(t2)
-  return new(x1 % y1, x2 % y2)
+  return new(x1 % x2, y1 % y2)
 end
 
 function Vector2.__pow(t1, t2)
   local x1, y1 = factor(t1)
   local x2, y2 = factor(t2)
-  return new(x1 ^ y1, x2 ^ y2)
+  return new(x1 ^ x2, y1 ^ y2)
 end
 
 function Vector2.__eq(t1, t2)
@@ -155,7 +155,7 @@ end
 function Vector2.__le(t1, t2)
   local x1, y1 = unpack(t1)
   local x2, y2 = unpack(t2)
-  return x1 == x2 and y1 == y2 or t1 < t2
+  return x1 <= x2 and y1 <= y2
 end
 
 function Vector2.__unm(t)
