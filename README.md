@@ -1,52 +1,41 @@
 # LuaVector2
-It's a 2D-vector library for Lua, created to be used by video games and simulations.  
+Simple 2D-vector library for Lua, created for generic purposes  
 ## Features
-* Vector math
-* Distances & vector normalizing
-* Computing an angle between the OX axis and the vector
-* Creating a vector from an angle at OX
+* Basic vector math
+* Distance between vectors (linear & square) & vector normalizing
+* Computing the angle between the vector amd the X axis or another vector and vice versa
 * Dot production
-* Comparing vectors & the vector's values
+* Cross production (as 3 component table) and its Z component
+* Comparing vectors & one vector's values
 * Vector rounding
-* Getting sign factors of the vector and the absolute vector
-* Inversing vectors
-* Multiplying and dividing vectors both by numbers and other vectors
-* Concatenating vectors into arrays
+* Unpacking & concatenating vectors like tables
 * Copying vectors and overriding their values
-* Unpacking vector
+* Constant vectors
+* Adaptation for math or games/graphics (inversed Y axis)
   
 ## Creating vectors  
-There're 2 methods to create a new vector: with X and Y `LuaVector2.new(x or 0, y or 0)` and with an angle and a vector length `LuaVector2.fromAngle(radian_angle, length or 1)`
-  
-## Vector math
-You can do all basic Lua math operations with two vectors. You also can multiply, divide and modulo a vector by a number and raise its components to the same numeric power.  
-You can also: 
-* Invert vectors (with a `-` sign)
-* Get:
-    * Absolute values (`LuaVector2:abs()`)
-    * Sign factors (`LuaVector2:sign()`)
-    * Dot products (`LuaVector2:dotProduct(a, b)`)
-    * Squared or real distance to an other point (`LuaVector2:sqDist(to or VECTOR.ZERO)`, `LuaVector2:dist(to or VECTOR.ZERO)`)
-    * Angle between the angle and the OX axis (`LuaVector2:toAngle()`)
-* Round them (`LuaVector2:floor()`,  `LuaVector2:ceil()`)
-* Normalize them (`LuaVector2:normalize(unit or 1)`).
+There are 3 methods to define a new vector:
+* With its X and Y coordinates (`LuaVector2.new(x, y)`)
+* With an angle (in radians) and a vector length (`LuaVector2.fromAngle(angle, length)`). *Optionally, it takes the basic vector, showing the direction of 0 radians, as the third argument.*
+* Copying a constant or already existing vector (`LuaVector2.copy(src)` or `src:copy()`)
 
 ## Copying vector, excracting and overriding values
 Each vector has 2 compoments: **X component** (`['x']` or `[1]`) and **Y component** (`['y']` or `[2]`).
-You can unpack the vector (`LuaVector2:unpack()`), override both its components (`LuaVector2:override(x, y)`) and copy it (`LuaVector2:copy()`).
+You can unpack the vector (`LuaVector2:unpack()`), override its components (`LuaVector2:override(x, y)`) or copy it (`LuaVector2:copy()`).
 
 ## Constant Vectors
-Direction vectors (*Note: direction where took with the inversed OY axis for almost game engines*):
-* `LuaVector2.RIGHT` = {1, 0}
-* `LuaVector2.DOWN` = {0, 1}
-* `LuaVector2.LEFT` = {-1, 0}
-* `LuaVector2.UP` = {0, -1}  
+Directional vectors:
+* `LuaVector2.RIGHT = {1, 0}`
+* `LuaVector2.DOWN = {0, -1}`
+* `LuaVector2.LEFT = {1, 0}`
+* `LuaVector2.UP = {0, 1}`  
 Unit vectors:
-* `LuaVector2.ZERO` = {0, 0}
-* `LuaVector2.ONE` = {1, 1}
-* `LuaVector2.INF` = {1/0, 1/0}
-* `LuaVector2.NEG_ONE` = {-1, -1}
-* `LuaVector2.NEG_INF` = {-1/0, -1/0}
+* `LuaVector2.ZERO = {0, 0}`
+* `LuaVector2.ONE = {1, 1}`
+* `LuaVector2.INF = {1/0, 1/0}`
+* `LuaVector2.NEG_ONE = {-1, -1}`
+* `LuaVector2.NEG_INF = {-1/0, -1/0}`  
+(*Note: the vertical directions where took with the direct Y axis. Most game engines (like (LÖVE)[http://love2d.org]) and other graphic libraries/programs use the inverted Y axis, which can be enabled with changing `Vector2.yScale = 1` to `Vector2.yScale = -1` **inside the library code**. Changing this option after initialization will change the function behaviour, but not the constant vectors, so be careful while using them!*)  
 
 ## License
 The library are destributed under the MIT License (see the library file).
