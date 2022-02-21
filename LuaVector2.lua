@@ -25,6 +25,7 @@ SOFTWARE.
 local Vector2 = {}
 Vector2.yScale = -1 -- -1 for games & graphics, 1 for mathimatical authenticity
 
+--Common functions (local)
 local function sign(t)
   if t == 0 then
     return 0
@@ -49,6 +50,7 @@ local function factor(f) -- Convert factor f to an {x, y} sequence
   return unpack(f)
 end
 
+--Object creation & metatable
 local function new(x, y)
   local t = {}
   t.x = x or 0
@@ -227,9 +229,22 @@ function Vector2.abs(t)
   return new(math.abs(t.x), math.abs(t.y))
 end
 
---Other maths
+--Vector products
 function Vector2.dotProduct(a, b)
   return a[1] * b[1] + a[2] * b[2]
+end
+
+function Vector2.crossProduct(a, b, z0)
+  z0 = z0 or 0 --Z coordinate of the 2D vector plain
+  local x, y, z --Product components
+  x = z0 * (a[2] - b[2])
+  y = z0 * (a[1] - b[1])
+  z = Vector2.crossProductZ(a, b)
+  return {x, y, z} --LuaVector2 does not operate 3D vectors, so it returns a table
+end
+
+function Vector2.crossProductZ(a, b) --Return the Z component of (a x b)
+  return a[1]*b[2] - b[1]*a[2]
 end
 
 --Angle functions (Every angle is in radians)
