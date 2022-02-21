@@ -176,22 +176,17 @@ Vector2.UP = -Vector2.DOWN
 Vector2.NEG_ONE = -Vector2.ONE
 Vector2.NEG_HUGE = -Vector2.HUGE
 
---Value/object managemant
+--Object & value management
 function Vector2.copy(t)
   return new(t.x, t.y)
 end
 
-function Vector2.override(t, x, y)
+function Vector2.override(t, x, y) --Override one (2nd = nil) or both components
   t.x, t.y = x or t.x, y or t.y
 end
 
 function Vector2.compareValues(t)
-  if t.x < t.y then
-    return -1
-  elseif t.x > t.y then
-    return 1
-  end
-  return 0
+  return sign(t.x - t.y) --1 if x > y, -1 if x < y, 0 if x = y
 end
 
 --Distance functions
@@ -237,30 +232,26 @@ function Vector2.dotProduct(a, b)
   return a[1] * b[1] + a[2] * b[2]
 end
 
---Angle functions
-function Vector2.fromAngle(a, d, rel)
-  d = d or 1
+--Angle functions (Every angle is in radians)
+function Vector2.fromAngle(a, d, rel) --a = angle, rel = relative vector (taken as 0 rad)
+  d = d or 1 --Vector length
   a = rel and a + rel:toAngle() or a
   return new(math.cos(a) * d, math.sin(a) * Vector2.yScale * d)
 end
 
-function Vector2.toAngle(t, deg, rel)
+function Vector2.toAngle(t, rel) --rel = relative vector (taken as 0 rad)
   local n = t:normalize()
   local a
   
   rel = rel and rel:normalize() or new(1, 0)
   n.y, rel.y = n.y * Vector2.yScale, rel.y * Vector2.yScale
   a = t:dotProduct(rel) / n:dist() / rel:dist()
-  
+
   if a == 0 then --acos(0) has ambiguous result IRL but always returns 0 in Lua
-    a = sign(n.x * rel.y) * sign(rel.x) * math.pi --asin(n.x) is always 1 or -1 while acos(t.y) = 0 
+    a = sign(n.x * rel.y) * sign(rel.x) * math.pi --asin(n.x) is always 1 or -1 when acos(t.y) = 0 
   else
     a = math.acos(a)
   end
-  
-  if deg then
-    return math.deg(a)
-  end 
   return a
 end 
 
