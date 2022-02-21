@@ -23,7 +23,7 @@ SOFTWARE.
 ]]
 
 local Vector2 = {}
-Vector2.yScale = -1 -- -1 for games & graphics, 1 for mathimatical authenticity
+Vector2.yScale = 1 -- -1 for games & graphics, 1 for mathimatical authenticity
 
 --Common functions (local)
 local function sign(t)
@@ -171,7 +171,7 @@ Vector2.ONE = new(1, 1)
 Vector2.HUGE = new(math.huge, math.huge)
 
 Vector2.RIGHT = new(1, 0)
-Vector2.DOWN = new(0, 1)
+Vector2.DOWN = new(0, -1) * Vector2.yScale
 
 Vector2.LEFT = -Vector2.RIGHT
 Vector2.UP = -Vector2.DOWN
