@@ -268,6 +268,16 @@ function Vector2.toAngle(t, rel) --rel = relative vector (taken as 0 rad)
     a = math.acos(a)
   end
   return a
-end 
+end
+
+function Vector2.bisectress(a, b, center) --Normalized bisectress vector between a & b vectors
+  --Uses vector math algorithm, taken from my another project
+  center = center or Vector2.ZERO
+  a = a - center
+  b = b - center
+  local sum = a + b
+  local correction = a:normalize() * (b:dist() - a:dist())
+  return (sum + correction):normalize()
+end
 
 return Vector2
